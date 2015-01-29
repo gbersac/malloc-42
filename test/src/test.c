@@ -1,43 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/22 15:38:58 by gbersac           #+#    #+#             */
-/*   Updated: 2015/01/29 15:24:23 by gbersac          ###   ########.fr       */
+/*   Created: 2015/01/28 14:08:14 by gbersac           #+#    #+#             */
+/*   Updated: 2015/01/29 15:08:12 by gbersac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "malloc.h"
+#include "test.h"
+
+void	one_test(void (*fct)(), char *str)
+{
+	fct();
+	free_all();
+	printf("OK %s\n", str);
+}
 
 void	print_block(t_block *b)
 {
-	if (b == NULL || b->is_free)
+	if (b == NULL){
+		printf("This block is NULL\n");
 		return ;
-	ft_put_addr(BDATA(b));
-	ft_putstr(" - ");
-	ft_put_addr(BDATA(b) + b->size);
-	ft_putstr(" : ");
-	ft_putnbr(b->size);
-	ft_putstr(" octets\n");
+	}
+	printf("block[%5zu]{@ %p, prev: ", b->size, b);
+	if (b->prev == NULL)
+		printf("NULL");
+	else
+		printf("%p", b->prev);
+	printf(", next: ");
+	if (b->next == NULL)
+		printf("NULL");
+	else
+		printf("%p", b->next);
+	printf("}");
+	if (b->is_free)
+		printf(" freed");
+	printf("\n");
 }
 
 void	show_page(t_page *page)
 {
 	t_block	*iter;
 
-	ft_putstr("Page ");
-	ft_put_addr(page);
-	ft_putstr(", type ");
+	printf("Page %p, type ", page);
 	if (page->type == TINY)
-		ft_putstr("TINY");
+		printf("TINY");
 	if (page->type == SMALL)
-		ft_putstr("SMALL");
+		printf("SMALL");
 	if (page->type == LARGE)
-		ft_putstr("LARGE");
-	ft_putstr("\n");
+		printf("LARGE");
+	printf("\n");
 	iter = page->first;
 	while (iter != NULL)
 	{
@@ -46,13 +61,13 @@ void	show_page(t_page *page)
 	}
 }
 
-void	show_alloc_mem(void)
+void	print_all(void)
 {
 	t_page	*iter;
 
 	iter = first_page();
 	if (iter == NULL)
-		ft_putstr("No allocation\n");
+		printf("No allocation\n");
 	while (iter != NULL)
 	{
 		show_page(iter);

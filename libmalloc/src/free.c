@@ -6,53 +6,43 @@
 /*   By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 12:36:34 by gbersac           #+#    #+#             */
-/*   Updated: 2015/01/23 19:39:55 by gbersac          ###   ########.fr       */
+/*   Updated: 2015/01/29 14:44:35 by gbersac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
-
-t_block	*ptr_is_valid(void *ptr)
-{
-	t_block	*b;
-
-	b = first_heap(NULL);
-	while (b->next != NULL)
-	{
-		if (BDATA(b) == ptr)
-		{
-			return b;
-		}
-		b = b->next;
-	}
-	return NULL;
-}
 
 t_block	*fusion_block(t_block *beg)
 {
 	t_block	*end;
 
 	end = beg;
-	while (beg->prev != NULL && beg->prev->isFree)
+	while (beg->prev != NULL && beg->prev->is_free)
 		beg = beg->prev;
-	while (end->next != NULL && end->next->isFree)
+	while (end->next != NULL && end->next->is_free)
 		end = end->next;
 	if (beg == end)
 	{
-		beg->isFree = 1;
+		beg->is_free = 1;
 		return (beg);
 	}
-	printf("fusion\n");
-	print_block(beg);
-	print_block(end);
-	printf("data             %p\n", BDATA(end));
-	printf("end point %p\n", BDATA(end) + end->size);
 	beg->size = BDATA(end) + end->size - BDATA(beg);
 	beg->next = end->next;
-	beg->isFree = 1;
-	if (beg->next == NULL)
-		last_heap(beg);
+	beg->is_free = 1;
 	return (beg);
+}
+
+void	check_page(t_block *b)
+{
+	t_page	*page;
+	t_block	*first;
+
+	page = block_parent_page(b);
+	first = page->first;
+	if (first != NULL &&
+			first->is_free &&
+			first->next == NULL)
+		del_page(page);
 }
 
 void	free(void *ptr)
@@ -61,9 +51,9 @@ void	free(void *ptr)
 
 	if (ptr == NULL)
 		return ;
-	b = ptr_is_valid(ptr);
+	b = search_ptr(ptr);
 	if (b == NULL)
 		return ;
 	b = fusion_block(b);
+	check_page(b);
 }
-

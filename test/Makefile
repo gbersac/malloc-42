@@ -6,7 +6,7 @@
 #    By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/22 13:15:39 by gbersac           #+#    #+#              #
-#    Updated: 2015/01/22 17:28:12 by gbersac          ###   ########.fr        #
+#    Updated: 2015/01/28 14:13:45 by gbersac          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME				:= test
 
-SRCS				:= main.c
+SRCS				:= main.c test.c
 
 PATH_OBJ			:= obj
 PATH_SRC			:= src
