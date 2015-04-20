@@ -6,7 +6,7 @@
 #    By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/22 13:15:39 by gbersac           #+#    #+#              #
-#    Updated: 2015/01/28 14:13:45 by gbersac          ###   ########.fr        #
+#    Updated: 2015/04/20 19:08:42 by gbersac          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,7 @@ OBJECTS				:= $(patsubst %.c, $(PATH_OBJ)/%.o, $(SRCS))
 # LIBRARY VARIABLES															   #
 ################################################################################
 
-export DIR_MALLOC	:= ../$(DIR_MALLOC)
-
-LIB_MALLOC			:= -L$(DIR_MALLOC) -lft_malloc
-
 export DIR_LIB 		:= $(patsubst %,../%,$(DIR_LIB))
-LIBRARY				:= $(LIB_MALLOC)
 INCLUDES			:= -I./$(PATH_INC) $(patsubst %,-I%/inc,$(DIR_LIB))
 
 ################################################################################

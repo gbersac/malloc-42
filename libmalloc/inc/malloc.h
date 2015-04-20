@@ -6,7 +6,7 @@
 /*   By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 12:35:28 by gbersac           #+#    #+#             */
-/*   Updated: 2015/01/29 14:43:40 by gbersac          ###   ########.fr       */
+/*   Updated: 2015/04/20 16:55:02 by gbersac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # define PAGE_SIZE	(sizeof(t_page))
 # define PDATA(p)	((void*)((char*)p + sizeof(t_page) + 1))
 
-# define TINY_LENGTH		8192
+# define TINY_LENGTH		(2 * getpagesize())
 # define TINY_MAX_ALLOC		128
 
-# define SMALL_LENGTH		65536
+# define SMALL_LENGTH		(16 * getpagesize())
 # define SMALL_MAX_ALLOC	1024
 
 # include <stdlib.h>

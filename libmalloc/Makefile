@@ -32,6 +32,7 @@ PATH_INC	= inc
 
 NAME		= libft_malloc_$(HOSTTYPE).so
 CFLAGS		= -Wall -Wextra -Werror
+DLFLAGS		= -shared -fPIC
 OBJECTS		= $(patsubst %.c, $(PATH_OBJ)/%.o, $(SRCS))
 DEBUG		= -g -O0
 
@@ -44,8 +45,8 @@ DEBUG		= -g -O0
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@ar rc $@ $(OBJECTS)
-	@ranlib $(NAME)
+	@gcc $(DLFLAGS) -o $@ $(OBJECTS) 
+	# @ranlib $(NAME)
 	@rm -f libft_malloc.so
 	@ln -s $(NAME) libft_malloc.so
 	@echo libft_malloc.so now link to $(NAME)
