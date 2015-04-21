@@ -42,7 +42,7 @@ for f in test_files:
 # malloc
 pr0 = page_reclaims("test0")
 pr1 = page_reclaims("test1")
-print("#####Test1")
+print("#####Test malloc")
 print("Number of page reclaim for test1: " + str(pr1))
 print("For question1 the result is (out of 5):")
 if pr1 < 255:
@@ -58,7 +58,15 @@ elif pr1 > 273 and pr1 < 312:
 elif pr1 > 255 and pr1 < 272:
     print("entre 255 et 272 pages, le malloc fonctionne et l'overhead est raisonnable: 5")
 
-
-
-
+#############################################################
+# Free
+pr2 = page_reclaims("test2")
+print("#####Test free")
+print("Page reclaims for test0:" + str(pr0) + " Page reclaims for test2: " + str(pr2))
+if pr2 - pr0 <= 3:
+    print("Max 3 page reclaim more than test0. The free is working as expected !")
+elif pr2 < pr1:
+    print("Free is functionning.")
+else:
+    print("The free does not work.")
 

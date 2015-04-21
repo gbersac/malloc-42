@@ -1,5 +1,5 @@
 bareme.txt
-test/src/bin
+test/src/bin/*
 
 # Object files
 *.o
