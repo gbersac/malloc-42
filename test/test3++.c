@@ -1,11 +1,11 @@
-#include "../../libmalloc/inc/malloc.h"
+#include "../libmalloc/inc/malloc.h"
 
-#define M (1024 * 1024) 
+#define M (1024 * 1024)
 
-void print(char *s) 
-{ 
-	write(1, s, strlen(s)); 
-} 
+void print(char *s)
+{
+	write(1, s, strlen(s));
+}
 
 int main()
 {

@@ -1,4 +1,4 @@
-#include "../../libmalloc/inc/malloc.h"
+#include "../libmalloc/inc/malloc.h"
 
 #define M (1024 * 1024)
 

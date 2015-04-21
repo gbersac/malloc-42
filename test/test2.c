@@ -1,4 +1,4 @@
-#include "../../libmalloc/inc/malloc.h"
+#include "../libmalloc/inc/malloc.h"
 
 int main()
 {
@@ -10,6 +10,7 @@ int main()
 	{
 		addr = (char*)malloc(1024);
 		addr[0] = 42;
+		free(addr);
 		i++;
 	}
 	return (0);

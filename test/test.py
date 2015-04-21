@@ -103,7 +103,6 @@ cmp_output("test4", "Bonjours\n")
 # show_alloc_mem
 print("#####Test print_alloc_mem")
 com = "gcc -o " + bin_folder + "test5" + " " + "test5.c" + "  -L. -lft_malloc -I " + lib_inc
-print(com)
 cmd.call(com.split())
 com = "./" + bin_folder + "test5"
 output = cmd_output(com.split()) 
