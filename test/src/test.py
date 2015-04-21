@@ -6,16 +6,17 @@ import re
 import subprocess as cmd
 import os
 import sys
+import shlex
 
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
 
 bin_folder = "bin/"
 test_files = ["test0.c", "test1.c", "test2.c", "test3.c",
-        "test4.c"]
+        "test3++.c", "test4.c"]
 lib_inc = "../../inc"
 
 #############################################################
-# function
+# functions
 def page_reclaims(prog):
     com = "./run.sh /usr/bin/time -l ./" + bin_folder + prog
     pipe = cmd.Popen(com.split(), stdout=cmd.PIPE, stderr=cmd.PIPE)
@@ -25,6 +26,19 @@ def page_reclaims(prog):
         found = m.group(1)
         return int(found)
     return ""
+
+def cmd_output(com):
+    pipe = cmd.Popen(com, stdout=cmd.PIPE, stderr=cmd.PIPE)
+    output, errput = pipe.communicate()
+    return output, errput
+
+def cmp_output(prog, to_compare):
+    com = "./run.sh ./" + bin_folder + prog
+    output = cmd_output(com.split()) 
+    if output[0] == to_compare:
+        print("The output is the one expected !")
+    else:
+        print("The output is not the one expected.")
 
 #############################################################
 # compilation
@@ -69,4 +83,29 @@ elif pr2 < pr1:
     print("Free is functionning.")
 else:
     print("The free does not work.")
+
+#############################################################
+# Realloc
+print("#####Test realloc")
+cmp_output("test3", "Bonjours\nBonjours\n")
+
+#############################################################
+# Realloc ++
+print("#####Test realloc++")
+cmp_output("test3++", "Bonjours\nBonjours\n")
+
+#############################################################
+# Errors
+print("#####Test errors")
+cmp_output("test4", "Bonjours\n")
+
+#############################################################
+# show_alloc_mem
+print("#####Test print_alloc_mem")
+com = "gcc -o " + bin_folder + "test5" + " " + "test5.c" + "  -L. -lft_malloc -I " + lib_inc
+print(com)
+cmd.call(com.split())
+com = "./" + bin_folder + "test5"
+output = cmd_output(com.split()) 
+print(output)
 
