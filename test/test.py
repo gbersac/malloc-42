@@ -34,7 +34,7 @@ def cmd_output(com):
 
 def cmp_output(prog, to_compare):
     com = "./run.sh ./" + bin_folder + prog
-    output = cmd_output(com.split()) 
+    output = cmd_output(com.split())
     if output[0] == to_compare:
         print("The output is the one expected !")
     else:
@@ -76,7 +76,7 @@ elif pr1 > 255 and pr1 < 272:
 # Free
 pr2 = page_reclaims("test2")
 print("#####Test free")
-print("Page reclaims for test0:" + str(pr0) + " Page reclaims for test2: " + str(pr2))
+print("Page reclaims for test0: " + str(pr0) + " Page reclaims for test2: " + str(pr2))
 if pr2 - pr0 <= 3:
     print("Max 3 page reclaim more than test0. The free is working as expected !")
 elif pr2 < pr1:
@@ -105,6 +105,6 @@ print("#####Test print_alloc_mem")
 com = "gcc -o " + bin_folder + "test5" + " " + "test5.c" + "  -L. -lft_malloc -I " + lib_inc
 cmd.call(com.split())
 com = "./" + bin_folder + "test5"
-output = cmd_output(com.split()) 
+output = cmd_output(com.split())
 print(output)
 

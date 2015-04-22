@@ -6,7 +6,7 @@
 /*   By: gbersac <gbersac@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/22 12:35:28 by gbersac           #+#    #+#             */
-/*   Updated: 2015/04/20 16:55:02 by gbersac          ###   ########.fr       */
+/*   Updated: 2015/04/22 15:13:14 by gbersac          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ void				ft_put_addr(void *addr);
 char				*ft_itoa(int n);
 char				*put_addr(void *addr);
 void				ft_putnbr(int n);
+
+void				*ft_memcpy(void *s1, const void *s2, size_t n);
 
 #endif
