@@ -101,6 +101,8 @@ cmp_output("test4", "Bonjours\n")
 
 #############################################################
 # show_alloc_mem
+# For this test to work, you need to have the libmalloc_darwin...
+# in the current directory.
 print("#####Test print_alloc_mem")
 com = "gcc -o " + bin_folder + "test5" + " " + "test5.c" + "  -L. -lft_malloc -I " + lib_inc
 cmd.call(com.split())
